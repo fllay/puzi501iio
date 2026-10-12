@@ -174,6 +174,19 @@ corrected for this board's actual wiring.
   direction (confirmed by its own probe failing with "Coherent DMA not
   supported in hardware" when tried on the TX/read side).
 
+- **AD9361 `CTRL_IN`/`CTRL_OUT` GPIO pins misassigned**: `gpio_ctl[0]`,
+  `[2]`, and `[3]` (FPGA outputs to the AD9361's `CTRL_IN0-3`) were instead
+  wired to three of the AD9361's own `CTRL_OUT` pins — pins the AD9361
+  itself drives as outputs, a direct driver-contention risk had the bus
+  ever been toggled. Separately, 7 of the 8 `gpio_status` (`CTRL_OUT0-7`)
+  bits were wrong: two were real `CTRL_OUT` pins at the wrong bit index,
+  one sat on `AD9361_CLK_OUT` instead, and four matched no documented
+  AD9361 pin in the official manual at all. Found by cross-checking every
+  pin in the XDC against the vendor's own `AD9361 Communication Port`
+  table; neither bus is referenced by the current device tree, so this was
+  a dormant risk rather than an observed symptom. Fixed by remapping both
+  buses 1:1 to the manual's `CTRL_IN0-3`/`CTRL_OUT0-7` pins.
+
 ## Roadmap
 
 - [ ] Export this PetaLinux project as a `.bsp` and register a `P501` board

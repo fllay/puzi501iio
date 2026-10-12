@@ -176,16 +176,15 @@ create_clock -period 10.000 -name ad9361_rx_clk [get_ports rx_clk_in_p]
 # CORRECTED: pin values read manually off the real P501 schematic by the user,
 # cross-verified (existence + zero conflicts) against Vivado's part database.
 ################################################################################
-# CTRL_IN: FPGA outputs to AD9361 (gpio_ctl) -- NOT part of today's verified
-# set (user didn't read these, Tier 3/unused by current device tree config).
-# gpio_ctl[1]'s old value (AG11) conflicted with the verified gpio_en_agc pin;
-# TEMPORARY placeholder pin (AE14, confirmed free/unused) pending the real
-# AD9361_CTRL_IN1 schematic pin -- not used by the current device tree config,
-# just needs to be electrically defined to satisfy DRC.
-set_property -dict {PACKAGE_PIN AG10 IOSTANDARD LVCMOS18} [get_ports {gpio_ctl[2]}]
-set_property -dict {PACKAGE_PIN AH10 IOSTANDARD LVCMOS18} [get_ports {gpio_ctl[3]}]
-set_property -dict {PACKAGE_PIN AF11 IOSTANDARD LVCMOS18} [get_ports {gpio_ctl[0]}]
+# CTRL_IN: FPGA outputs to AD9361 (gpio_ctl). CORRECTED against the official
+# user manual's AD9361 Communication Port table (CTRL_IN0-3): the previous
+# values for [0]/[2]/[3] sat on AD9361_CTRL_OUT2/5/6 instead -- pins the
+# AD9361 itself drives as outputs, a direct driver-contention risk once this
+# bus is ever actually used. [1] was already correct (AD12 = CTRL_IN1).
+set_property -dict {PACKAGE_PIN AB1  IOSTANDARD LVCMOS18} [get_ports {gpio_ctl[0]}]
 set_property -dict {PACKAGE_PIN AD12 IOSTANDARD LVCMOS18} [get_ports {gpio_ctl[1]}]
+set_property -dict {PACKAGE_PIN AC1  IOSTANDARD LVCMOS18} [get_ports {gpio_ctl[2]}]
+set_property -dict {PACKAGE_PIN AE10 IOSTANDARD LVCMOS18} [get_ports {gpio_ctl[3]}]
 
 # AD9361 SPI bus
 set_property -dict {PACKAGE_PIN AH12 IOSTANDARD LVCMOS18} [get_ports spi_clk]
@@ -215,15 +214,17 @@ set_property -dict {PACKAGE_PIN Y10  IOSTANDARD LVCMOS18} [get_ports {clk_en[1]}
 
 ################################################################################
 # AD9361 - CTRL_OUT STATUS INPUTS (Bank 64, LVCMOS18)
-# gpio_status[0]'s old value (AB4) conflicted with the verified gpio_resetb
-# pin; TEMPORARY placeholder pin (AH14, confirmed free/unused) pending the
-# real AD9361_CTRL_OUT0 schematic pin.
+# CORRECTED against the official user manual's AD9361 Communication Port
+# table (CTRL_OUT0-7): only [0] was right before. [1]/[3] were real CTRL_OUT
+# pins at the wrong bit index; [2] was AD9361_CLK_OUT (a different signal
+# entirely); [4]-[7] (AB7/AC7/AD7/AE7) matched no documented AD9361 pin at
+# all. Now gpio_status[N] = AD9361_CTRL_OUTN for every N, per the manual.
 ################################################################################
-set_property -dict {PACKAGE_PIN AB2 IOSTANDARD LVCMOS18} [get_ports {gpio_status[0]}]
-set_property -dict {PACKAGE_PIN AB3 IOSTANDARD LVCMOS18} [get_ports {gpio_status[1]}]
-set_property -dict {PACKAGE_PIN AC4 IOSTANDARD LVCMOS18} [get_ports {gpio_status[2]}]
-set_property -dict {PACKAGE_PIN AC3 IOSTANDARD LVCMOS18} [get_ports {gpio_status[3]}]
-set_property -dict {PACKAGE_PIN AB7 IOSTANDARD LVCMOS18} [get_ports {gpio_status[4]}]
-set_property -dict {PACKAGE_PIN AC7 IOSTANDARD LVCMOS18} [get_ports {gpio_status[5]}]
-set_property -dict {PACKAGE_PIN AD7 IOSTANDARD LVCMOS18} [get_ports {gpio_status[6]}]
-set_property -dict {PACKAGE_PIN AE7 IOSTANDARD LVCMOS18} [get_ports {gpio_status[7]}]
+set_property -dict {PACKAGE_PIN AB2  IOSTANDARD LVCMOS18} [get_ports {gpio_status[0]}]
+set_property -dict {PACKAGE_PIN AF10 IOSTANDARD LVCMOS18} [get_ports {gpio_status[1]}]
+set_property -dict {PACKAGE_PIN AF11 IOSTANDARD LVCMOS18} [get_ports {gpio_status[2]}]
+set_property -dict {PACKAGE_PIN AC2  IOSTANDARD LVCMOS18} [get_ports {gpio_status[3]}]
+set_property -dict {PACKAGE_PIN AB3  IOSTANDARD LVCMOS18} [get_ports {gpio_status[4]}]
+set_property -dict {PACKAGE_PIN AG10 IOSTANDARD LVCMOS18} [get_ports {gpio_status[5]}]
+set_property -dict {PACKAGE_PIN AH10 IOSTANDARD LVCMOS18} [get_ports {gpio_status[6]}]
+set_property -dict {PACKAGE_PIN AC3  IOSTANDARD LVCMOS18} [get_ports {gpio_status[7]}]

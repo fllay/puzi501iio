@@ -1658,7 +1658,7 @@
         "PCIE_BOARD_INTERFACE": [ { "value": "custom", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "DP_BOARD_INTERFACE": [ { "value": "custom", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "SATA_BOARD_INTERFACE": [ { "value": "custom", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
-        "preset": [ { "value": "None", "resolve_type": "user", "usage": "all" } ],
+        "preset": [ { "value": "None", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "PSU__SD0_ROUTE_THROUGH_FPD": [ { "value": "0", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "PSU__SD1_ROUTE_THROUGH_FPD": [ { "value": "0", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "PSU__NAND_ROUTE_THROUGH_FPD": [ { "value": "0", "value_src": "user", "resolve_type": "user", "enabled": false, "usage": "all" } ],
