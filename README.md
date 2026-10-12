@@ -15,7 +15,7 @@ down one at a time against the real schematic and the official user manual.
 |---|---|---|
 | UART console | ✅ Working | PS UART1 (`ttyPS1`), not UART0 |
 | Root login | ✅ Working | password `root` — **change this before deploying** |
-| AD9361 (SPI/RX/TX) | ✅ Working | SPI control, RX DMA, TX DDS, internal loopback all verified |
+| AD9361 (SPI/RX/TX) | ✅ Working | SPI control, RX DMA, TX DDS, internal loopback all verified; RX capture ~220MB/s (coherent DMA) |
 | USB (gadget mode) | ✅ Working | Composite USB gadget: native libiio (FunctionFS) + CDC-ECM network, PlutoSDR-style |
 | USB (host mode) | ⚠️ Not in this build | `dr_mode` is a build-time choice — see below |
 | Ethernet (RGMII, 1G) | ✅ Working | Realtek RTL8211F, confirmed 1Gbps link + real bidirectional traffic |
@@ -157,6 +157,22 @@ corrected for this board's actual wiring.
      clock-to-data delay compensation on the PHY, and this board's FPGA side
      doesn't add it either, corrupting every transmitted frame despite link
      training (a separate, simpler negotiation) succeeding.
+
+- **AD9361 RX capture throughput capped at ~59MB/s regardless of sample rate**:
+  the `axi_ad9361_adc_dma` master was wired to a plain, non-coherent PS HP
+  port, so every CPU read of a capture buffer went through DRAM as uncached
+  memory — the same ~59MB/s ceiling at 16MS/s and at 30.72MS/s, confirming a
+  fixed CPU-read limit rather than anything USB/iiod/sample-rate dependent.
+  Fixed by moving the RX DMA master to a coherent `S_AXI_HPC0_FPD` port (with
+  its `AWUSER`/`ARUSER` sideband signals explicitly tied high — ZynqMP
+  requires that bit asserted on HPC ports to actually get snooped/coherent
+  transactions; left floating, it silently behaves exactly like a plain HP
+  port) and adding `dma-coherent` to its device tree node. Measured result:
+  ~220MB/s direct capture throughput, ~3.7x improvement. TX
+  (`axi_ad9361_dac_dma`) stays on a non-coherent path by hardware necessity —
+  the `axi_dmac` IP only implements coherent support for the memory-write
+  direction (confirmed by its own probe failing with "Coherent DMA not
+  supported in hardware" when tried on the TX/read side).
 
 ## Roadmap
 

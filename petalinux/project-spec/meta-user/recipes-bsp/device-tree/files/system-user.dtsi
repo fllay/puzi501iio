@@ -17,6 +17,32 @@
 	/delete-property/ pinctrl-0;
 };
 
+/* THROUGHPUT FIX (2026-10-12): the AD9361 RX/TX DMA (axi_dmac) data masters were
+ * wired to plain, non-coherent HP ports (HP1/HP2 FPD), meaning the CPU had to read
+ * capture buffers as uncached memory -- measured at ~59 MB/s regardless of
+ * configured sample rate (16 vs 30.72 MS/s made no difference, confirming a fixed
+ * CPU-read ceiling, not a USB/iiod/sample-rate-dependent limit). Fixed in Vivado by
+ * moving both DMA masters onto the coherent HPC0/HPC1 FPD ports instead (which route
+ * through the cache-coherent interconnect), with their AWUSER/ARUSER sideband
+ * signals tied high -- ZynqMP requires that bit asserted on HPC ports to actually
+ * get snooped/coherent transactions; left floating, it defaults to behaving exactly
+ * like a plain HP port despite the physical rewiring.
+ *
+ * dma-coherent on the RX node only: the axi_dmac IP only exposes a
+ * CACHE_COHERENT_DEST parameter, no CACHE_COHERENT_SRC counterpart -- ADI only
+ * implemented coherent support for the memory-WRITE direction. RX's memory-facing
+ * port is its destination (capturing into DDR) and has CACHE_COHERENT_DEST=true, so
+ * dma-coherent is correct there. TX's memory-facing port is its SOURCE (reading
+ * samples out to play), which this IP has no coherent support for at all --
+ * confirmed by hardware: "dma-axi-dmac 9c420000.dma: Coherent DMA not supported in
+ * hardware" / "probe ... failed with error -22" when dma-coherent was set on it.
+ * TX stays physically wired to HPC1 (harmless -- without the DT flag Linux just
+ * treats it as an ordinary non-coherent buffer with explicit cache maintenance,
+ * same as before) but does NOT get the dma-coherent property. */
+&{/fpga-axi@0/dma@9c400000} {
+	dma-coherent;
+};
+
 / {
 	chosen {
 		/* P501 only clocks PS UART1 (see psu_init.c: UART1_REF_CTRL CLKACT=1,

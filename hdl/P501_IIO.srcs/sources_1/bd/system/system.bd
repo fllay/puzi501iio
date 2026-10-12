@@ -2214,6 +2214,12 @@
           "PSU__ACT_DDR_FREQ_MHZ": {
             "value": "1200.000000"
           },
+          "PSU__AFI0_COHERENCY": {
+            "value": "0"
+          },
+          "PSU__AFI1_COHERENCY": {
+            "value": "0"
+          },
           "PSU__AUX_REF_CLK__FREQMHZ": {
             "value": "33.333"
           },
@@ -3823,7 +3829,7 @@
             ]
           },
           "PSU__PROTECTION__MASTERS": {
-            "value": "USB1:NonSecure;0|USB0:NonSecure;1|S_AXI_LPD:NA;0|S_AXI_HPC1_FPD:NA;0|S_AXI_HPC0_FPD:NA;0|S_AXI_HP3_FPD:NA;0|S_AXI_HP2_FPD:NA;1|S_AXI_HP1_FPD:NA;1|S_AXI_HP0_FPD:NA;0|S_AXI_ACP:NA;0|S_AXI_ACE:NA;0|SD1:NonSecure;1|SD0:NonSecure;1|SATA1:NonSecure;0|SATA0:NonSecure;0|RPU1:Secure;1|RPU0:Secure;1|QSPI:NonSecure;1|PMU:NA;1|PCIe:NonSecure;1|NAND:NonSecure;0|LDMA:NonSecure;1|GPU:NonSecure;1|GEM3:NonSecure;0|GEM2:NonSecure;0|GEM1:NonSecure;1|GEM0:NonSecure;0|FDMA:NonSecure;1|DP:NonSecure;1|DAP:NA;1|Coresight:NA;1|CSU:NA;1|APU:NA;1"
+            "value": "USB1:NonSecure;0|USB0:NonSecure;1|S_AXI_LPD:NA;0|S_AXI_HPC1_FPD:NA;1|S_AXI_HPC0_FPD:NA;1|S_AXI_HP3_FPD:NA;0|S_AXI_HP2_FPD:NA;0|S_AXI_HP1_FPD:NA;0|S_AXI_HP0_FPD:NA;0|S_AXI_ACP:NA;0|S_AXI_ACE:NA;0|SD1:NonSecure;1|SD0:NonSecure;1|SATA1:NonSecure;0|SATA0:NonSecure;0|RPU1:Secure;1|RPU0:Secure;1|QSPI:NonSecure;1|PMU:NA;1|PCIe:NonSecure;1|NAND:NonSecure;0|LDMA:NonSecure;1|GPU:NonSecure;1|GEM3:NonSecure;0|GEM2:NonSecure;0|GEM1:NonSecure;1|GEM0:NonSecure;0|FDMA:NonSecure;1|DP:NonSecure;1|DAP:NA;1|Coresight:NA;1|CSU:NA;1|APU:NA;1"
           },
           "PSU__PROTECTION__MASTERS_TZ": {
             "value": "GEM0:NonSecure|SD1:NonSecure|GEM2:NonSecure|GEM1:NonSecure|GEM3:NonSecure|PCIe:NonSecure|DP:NonSecure|NAND:NonSecure|GPU:NonSecure|USB1:NonSecure|USB0:NonSecure|LDMA:NonSecure|FDMA:NonSecure|QSPI:NonSecure|SD0:NonSecure"
@@ -3885,10 +3891,10 @@
           "PSU__SATA__PERIPHERAL__ENABLE": {
             "value": "0"
           },
-          "PSU__SAXIGP3__DATA_WIDTH": {
+          "PSU__SAXIGP0__DATA_WIDTH": {
             "value": "128"
           },
-          "PSU__SAXIGP4__DATA_WIDTH": {
+          "PSU__SAXIGP1__DATA_WIDTH": {
             "value": "128"
           },
           "PSU__SD0_COHERENCY": {
@@ -4140,10 +4146,10 @@
           "PSU__USB__RESET__POLARITY": {
             "value": "Active Low"
           },
-          "PSU__USE_DIFF_RW_CLK_GP3": {
+          "PSU__USE_DIFF_RW_CLK_GP0": {
             "value": "0"
           },
-          "PSU__USE_DIFF_RW_CLK_GP4": {
+          "PSU__USE_DIFF_RW_CLK_GP1": {
             "value": "0"
           },
           "PSU__USE__ADMA": {
@@ -4240,19 +4246,19 @@
             "value": "0"
           },
           "PSU__USE__S_AXI_GP0": {
-            "value": "0"
+            "value": "1"
           },
           "PSU__USE__S_AXI_GP1": {
-            "value": "0"
+            "value": "1"
           },
           "PSU__USE__S_AXI_GP2": {
             "value": "0"
           },
           "PSU__USE__S_AXI_GP3": {
-            "value": "1"
+            "value": "0"
           },
           "PSU__USE__S_AXI_GP4": {
-            "value": "1"
+            "value": "0"
           },
           "PSU__USE__S_AXI_GP5": {
             "value": "0"
@@ -4349,15 +4355,15 @@
               }
             }
           },
-          "S_AXI_HP1_FPD": {
+          "S_AXI_HPC0_FPD": {
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
             "mode": "Slave",
-            "memory_map_ref": "SAXIGP3"
+            "memory_map_ref": "SAXIGP0"
           },
-          "S_AXI_HP2_FPD": {
+          "S_AXI_HPC1_FPD": {
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
             "mode": "Slave",
-            "memory_map_ref": "SAXIGP4"
+            "memory_map_ref": "SAXIGP1"
           }
         },
         "addressing": {
@@ -4632,13 +4638,13 @@
       "axi_hp1_interconnect_M00_AXI": {
         "interface_ports": [
           "axi_hp1_interconnect/M00_AXI",
-          "sys_ps8/S_AXI_HP1_FPD"
+          "sys_ps8/S_AXI_HPC0_FPD"
         ]
       },
       "axi_hp2_interconnect_M00_AXI": {
         "interface_ports": [
           "axi_hp2_interconnect/M00_AXI",
-          "sys_ps8/S_AXI_HP2_FPD"
+          "sys_ps8/S_AXI_HPC1_FPD"
         ]
       },
       "gmii_to_rgmii_0_MDIO_PHY": {
@@ -4733,7 +4739,11 @@
       "VCC_1_dout": {
         "ports": [
           "VCC_1/dout",
-          "sys_ps8/emio_spi0_ss_i_n"
+          "sys_ps8/emio_spi0_ss_i_n",
+          "sys_ps8/saxigp0_aruser",
+          "sys_ps8/saxigp0_awuser",
+          "sys_ps8/saxigp1_aruser",
+          "sys_ps8/saxigp1_awuser"
         ]
       },
       "adf4002_dri_0_adf_spi_clk": {
@@ -5336,10 +5346,10 @@
           "axi_sysid_0/s_axi_aclk",
           "rom_sys_0/clk",
           "sys_ps8/maxihpm0_lpd_aclk",
-          "sys_ps8/saxihp1_fpd_aclk",
-          "sys_ps8/saxihp2_fpd_aclk",
           "sys_rstgen/slowest_sync_clk",
-          "util_ad9361_tdd_sync/clk"
+          "util_ad9361_tdd_sync/clk",
+          "sys_ps8/saxihpc0_fpd_aclk",
+          "sys_ps8/saxihpc1_fpd_aclk"
         ]
       },
       "sys_ps8_pl_clk1": {
@@ -5548,27 +5558,27 @@
         "address_spaces": {
           "m_dest_axi": {
             "segments": {
-              "SEG_sys_ps8_HP1_DDR_LOW": {
-                "address_block": "/sys_ps8/SAXIGP3/HP1_DDR_LOW",
+              "SEG_sys_ps8_HPC0_DDR_LOW": {
+                "address_block": "/sys_ps8/SAXIGP0/HPC0_DDR_LOW",
                 "offset": "0x00000000",
                 "range": "2G"
               },
-              "SEG_sys_ps8_HP1_LPS_OCM": {
-                "address_block": "/sys_ps8/SAXIGP3/HP1_LPS_OCM",
-                "offset": "0x00000000",
-                "range": "1",
+              "SEG_sys_ps8_HPC0_LPS_OCM": {
+                "address_block": "/sys_ps8/SAXIGP0/HPC0_LPS_OCM",
+                "offset": "0xFF000000",
+                "range": "16M",
                 "is_excluded": "TRUE"
               },
-              "SEG_sys_ps8_HP1_PCIE_LOW": {
-                "address_block": "/sys_ps8/SAXIGP3/HP1_PCIE_LOW",
-                "offset": "0x00000000",
-                "range": "1",
+              "SEG_sys_ps8_HPC0_PCIE_LOW": {
+                "address_block": "/sys_ps8/SAXIGP0/HPC0_PCIE_LOW",
+                "offset": "0xE0000000",
+                "range": "256M",
                 "is_excluded": "TRUE"
               },
-              "SEG_sys_ps8_HP1_QSPI": {
-                "address_block": "/sys_ps8/SAXIGP3/HP1_QSPI",
-                "offset": "0x00000000",
-                "range": "1",
+              "SEG_sys_ps8_HPC0_QSPI": {
+                "address_block": "/sys_ps8/SAXIGP0/HPC0_QSPI",
+                "offset": "0xC0000000",
+                "range": "512M",
                 "is_excluded": "TRUE"
               }
             }
@@ -5579,27 +5589,27 @@
         "address_spaces": {
           "m_src_axi": {
             "segments": {
-              "SEG_sys_ps8_HP2_DDR_LOW": {
-                "address_block": "/sys_ps8/SAXIGP4/HP2_DDR_LOW",
+              "SEG_sys_ps8_HPC1_DDR_LOW": {
+                "address_block": "/sys_ps8/SAXIGP1/HPC1_DDR_LOW",
                 "offset": "0x00000000",
                 "range": "2G"
               },
-              "SEG_sys_ps8_HP2_LPS_OCM": {
-                "address_block": "/sys_ps8/SAXIGP4/HP2_LPS_OCM",
-                "offset": "0x00000000",
-                "range": "1",
+              "SEG_sys_ps8_HPC1_LPS_OCM": {
+                "address_block": "/sys_ps8/SAXIGP1/HPC1_LPS_OCM",
+                "offset": "0xFF000000",
+                "range": "16M",
                 "is_excluded": "TRUE"
               },
-              "SEG_sys_ps8_HP2_PCIE_LOW": {
-                "address_block": "/sys_ps8/SAXIGP4/HP2_PCIE_LOW",
-                "offset": "0x00000000",
-                "range": "1",
+              "SEG_sys_ps8_HPC1_PCIE_LOW": {
+                "address_block": "/sys_ps8/SAXIGP1/HPC1_PCIE_LOW",
+                "offset": "0xE0000000",
+                "range": "256M",
                 "is_excluded": "TRUE"
               },
-              "SEG_sys_ps8_HP2_QSPI": {
-                "address_block": "/sys_ps8/SAXIGP4/HP2_QSPI",
-                "offset": "0x00000000",
-                "range": "1",
+              "SEG_sys_ps8_HPC1_QSPI": {
+                "address_block": "/sys_ps8/SAXIGP1/HPC1_QSPI",
+                "offset": "0xC0000000",
+                "range": "512M",
                 "is_excluded": "TRUE"
               }
             }

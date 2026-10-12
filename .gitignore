@@ -20,6 +20,9 @@ hdl/library/**/*.ip_user_files/
 hdl/library/**/*.sim/
 hdl/library/**/*.runs/
 hdl/library/**/*.xpr
+hdl/library/**/*.jou
+hdl/library/**/*.log
+hdl/library/**/*.str
 
 # --- PetaLinux (petalinux/) ---
 # Same idea: petalinux-create/-build regenerate these fresh.
