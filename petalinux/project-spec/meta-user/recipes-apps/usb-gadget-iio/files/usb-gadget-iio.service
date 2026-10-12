@@ -1,0 +1,13 @@
+[Unit]
+Description=USB composite gadget: native libiio (FunctionFS) + CDC-ECM network (PlutoSDR-style)
+After=sysinit.target local-fs.target
+DefaultDependencies=no
+ConditionPathExists=/sys/class/udc
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/usb-gadget-iio.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

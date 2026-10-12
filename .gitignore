@@ -1,0 +1,45 @@
+# --- Vivado (hdl/) ---
+# Protective ignores: these directories don't exist in this repo as checked in,
+# but Vivado will recreate them the moment the project is opened/built here.
+hdl/P501_IIO.cache/
+hdl/P501_IIO.gen/
+hdl/P501_IIO.hw/
+hdl/P501_IIO.ip_user_files/
+hdl/P501_IIO.runs/
+hdl/P501_IIO.sim/
+hdl/.Xil/
+hdl/.claude/
+hdl/*.jou
+hdl/*.log
+hdl/*.str
+hdl/*.backup.jou
+hdl/*.backup.log
+hdl/webtalk*
+hdl/library/**/*.cache/
+hdl/library/**/*.ip_user_files/
+hdl/library/**/*.sim/
+hdl/library/**/*.runs/
+hdl/library/**/*.xpr
+
+# --- PetaLinux (petalinux/) ---
+# Same idea: petalinux-create/-build regenerate these fresh.
+petalinux/build/
+petalinux/images/
+petalinux/components/
+petalinux/.petalinux/
+petalinux/*.log
+petalinux/*.jou
+
+# Yocto/PetaLinux tool scratch that can reappear under project-spec/configs/
+petalinux/project-spec/configs/.Xil/
+petalinux/project-spec/configs/.statistics
+petalinux/project-spec/configs/configs/
+petalinux/project-spec/configs/rootfsconfigs/Kconfig
+petalinux/project-spec/configs/gen-machineconf.log*
+petalinux/project-spec/configs/*.old
+
+# --- General ---
+.DS_Store
+._*
+*.swp
+*~

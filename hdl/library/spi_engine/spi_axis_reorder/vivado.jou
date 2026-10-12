@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Sun Sep 24 19:43:04 2023
+# Process ID: 12583
+# Current directory: /home/ubuntu/zcu4ev_fmcomms_uart0/hdl/library/spi_engine/spi_axis_reorder
+# Command line: vivado -mode batch -source spi_axis_reorder_ip.tcl
+# Log file: /home/ubuntu/zcu4ev_fmcomms_uart0/hdl/library/spi_engine/spi_axis_reorder/vivado.log
+# Journal file: /home/ubuntu/zcu4ev_fmcomms_uart0/hdl/library/spi_engine/spi_axis_reorder/vivado.jou
+#-----------------------------------------------------------
+source spi_axis_reorder_ip.tcl

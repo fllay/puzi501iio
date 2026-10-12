@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Sun Sep 24 19:45:56 2023
+# Process ID: 13823
+# Current directory: /home/ubuntu/zcu4ev_fmcomms_uart0/hdl/library/util_mii_to_rmii
+# Command line: vivado -mode batch -source util_mii_to_rmii_ip.tcl
+# Log file: /home/ubuntu/zcu4ev_fmcomms_uart0/hdl/library/util_mii_to_rmii/vivado.log
+# Journal file: /home/ubuntu/zcu4ev_fmcomms_uart0/hdl/library/util_mii_to_rmii/vivado.jou
+#-----------------------------------------------------------
+source util_mii_to_rmii_ip.tcl
